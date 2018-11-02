@@ -1,0 +1,54 @@
+<html>
+<body background="bg3.jpg">
+
+<img src="OBJECT1.jpg"  width="100% height:"400";>
+<br>
+<center><br>
+<font size=4><br>
+<b>NEW USER</b><br><br>
+</font>
+<form action="/scripts/nfs.py" method="post">
+Drive name: <input name='drive' size=21"> 
+<br><br>
+Drive size: <input name='size' size="21">
+<br><br>
+IP Adresss: <input name='ip' size=21><br><br>
+Password:   <input name='pass' size="22"><br><br>
+<br>
+<input type="submit" value='Create drive' size="10" name='drive'><br><br>
+</form>
+</center>
+<center>
+<br>
+<font size=4>
+<b>EXISTING USER</b><br>
+</font><br>
+<form action="/scripts/resize_nfs.py" method="post">
+Enter drive name: <input type="text" value="" name="drive1">
+Enter drive size:<input type="text" value="" name="size">
+<br>
+<br>
+Increase your drive size <input type='radio' name='resize' value='increase'><br><pre>		</pre>
+Decrease your drive size <input type='radio' name='resize' value='decrease'><br><br>
+<br>
+<input type="submit" value='Update drive' name='drive'>
+</form>
+<br>
+
+<form action="/scripts/snap.py" method="post">
+Drive Name:<input type='text' name='dname'>
+<br><br>
+Username:<input type='text' name='uname'><br/><br/>
+Date:<input type='text' name='date'>
+<br>
+<input type="submit" value="TAKE SNAPSHOT OF YOUR DRIVE">
+</form>
+<br>
+<br>
+<form action="/scripts/umount_nfs.py" method="post"><br>
+Enter the drive name: <input type="text" value="" name="drive">
+<input type="submit" value="Delete" name="delete">
+</form>
+</center>
+</body>
+</html>
