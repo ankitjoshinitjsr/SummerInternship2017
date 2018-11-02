@@ -1,0 +1,42 @@
+---
+- hosts: web
+  tasks:
+    
+     - package:
+         name: "sshpass-1.06-1.el7.x86_64"
+         state: present
+     
+     - lvol:
+         vg: "objectstorage"
+         lv: "black"
+         size: "50"
+
+     - file:
+         state: directory
+         path: "/sshcloud/black"
+         owner: black
+         mode: 0700
+  
+     - filesystem:
+         fstype: ext4
+         dev: "/dev/objectstorage/black"
+ 
+     - mount:
+         path: "/sshcloud/black"
+         src: "/dev/objectstorage/black"
+         fstype: ext4      
+         state: mounted  
+     - service:
+         name: "sshd"
+         state: restarted
+- hosts: client
+  tasks:
+     - package:
+         name: "fuse-sshfs-2.5-1.el7.x86_64"
+         state: present
+     - file:
+         state: directory
+         path: "/media/black"
+     - package:
+         name: "sshpass-1.06-1.el7.x86_64"
+         state: present 

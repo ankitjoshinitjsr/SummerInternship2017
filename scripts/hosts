@@ -1,0 +1,4 @@
+[web]
+192.168.43.46 ansible_ssh_user=root ansible_ssh_pass=ucantcme
+[client]
+192.168.43.120 ansible_ssh_user=root ansible_ssh_pass=blackhat

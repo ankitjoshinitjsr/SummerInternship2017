@@ -1,0 +1,80 @@
+#!/usr/bin/python2
+
+#(vg already exists)
+#lv partition 2GB
+import commands
+import cgi
+
+
+#serverip=raw_input("enter the ip address where you want to setup")
+#serverpass=getpass("enter the server password")
+serverip=cgi.FormContent()['ip'][0]
+serverpass=cgi.FormContent()['server'][0]
+#username=raw_input("enter your username")
+#partsize=raw_input("enter part size")
+
+username=cgi.FormContent()['user'][0]
+partsize=cgi.FormContent()['partition'][0]
+
+commmands.getoutput("print serverip,serverpass,username,partsize")
+commands.getoutput("sshpass -p {4} ssh -o stricthostkeychecking=no -l root {3} lvcreate --size {0}G --name {1}-lv1 myvg(created already)".format(partsize,username,serverip,serverpass)
+
+"""
+#step2:
+#format ext4
+
+vgcheck=commands.getstatusoutput("sshpass -p {0} ssh -o stricthostkeychecking=no -l root {1} vgdisplay myvg".format(serverpass,serverip))
+if vgcheck[0]==0:
+	
+	commands.getoutput("shpass -p {0} ssh -o stricthostkeychecking=no -l root {1} mkfs.ext4 /dev/myvg/{2}-lv1".format(serverpass,serverip,username)
+
+#step3
+#mount folder /share
+	commands.getoutput("shpass -p {0} ssh -o stricthostkeychecking=no -l root {1} mkdir -p /share/{}-lv1".format(serverpass,serverip,username))
+	commands.getoutput("shpass -p {0} ssh -o stricthostkeychecking=no -l root {1}  mount /dev/myvg/{2}-lv1 /share/{2}-lv1".format(serverpass,serverip,username)
+	fstabstring="/dev/myvg/{0}-lv1  /share/{0}-lv1  ext4  defaults  1  2".format(username)
+	commands.getoutput("shpass -p {0} ssh -o stricthostkeychecking=no -l root {1} scp {1}:/etc/fstab /tmp/".format(serverpass,serverip)
+
+
+#dont use w mode over here 
+
+	fstabfh=open('/etc/fstab' , 'a')
+	fstabfh.write(fstabString + "\n")
+	fstabfh.close()
+	commands.getoutput("shpass -p {0} ssh -o stricthostkeychecking=no -l root {1}  scp //tmp/fstab {1}:/etc/fstab".format(serverpass,serverip)
+	fstabstatus=commands.getstatusoutput("mount -a")
+	if fstabstatus[0]==0:
+		print""
+	else:
+		print"there are some error in fstab"
+
+
+
+#step4
+#nfs server : /etc/exports
+#/share clientip
+	clientip=raw_input("enter client ip you want to share:")
+	sharelocation=commands.getoutput("/share/{0}-lv1 {1}".format(username,clientip)
+
+	nfsfh=open('etc/exports', 'a')
+	nfsfh.write(sharelocation + "\n")
+	nfsfh.close()
+
+
+#step5
+	commands.getoutput("systemctl restart nfs")
+else:
+	print"myvg doesnot exit create one vg with name myvg "
+
+
+"""
+
+
+
+
+
+
+
+
+
+
